@@ -1,48 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'light_color.dart';
 
 class AppTheme {
-  const AppTheme();
-  static ThemeData lightTheme = ThemeData(
-      backgroundColor: LightColor.background,
-      primaryColor: LightColor.background,
-      cardTheme: CardTheme(color: LightColor.background),
-      textTheme: TextTheme(bodyText1: TextStyle(color: LightColor.black)),
-      iconTheme: IconThemeData(color: LightColor.iconColor),
-      bottomAppBarColor: LightColor.background,
-      dividerColor: LightColor.lightGrey,
-      primaryTextTheme:
-      TextTheme(bodyText1: TextStyle(color: LightColor.titleTextColor)));
 
-  static TextStyle titleStyle =
-  const TextStyle(color: LightColor.titleTextColor, fontSize: 16);
-  static TextStyle subTitleStyle =
-  const TextStyle(color: LightColor.subTitleTextColor, fontSize: 12);
 
-  static TextStyle h1Style =
-  const TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
-  static TextStyle h2Style = const TextStyle(fontSize: 22);
-  static TextStyle h3Style = const TextStyle(fontSize: 20);
-  static TextStyle h4Style = const TextStyle(fontSize: 18);
-  static TextStyle h5Style = const TextStyle(fontSize: 16);
-  static TextStyle h6Style = const TextStyle(fontSize: 14);
+  static ThemeData theme = ThemeData(
+  // Define the default brightness and colors.
+  brightness: Brightness.dark,
+  primaryColor: Colors.lightBlue[800],
 
-  static List<BoxShadow> shadow = <BoxShadow>[
-    BoxShadow(color: Color(0xfff8f8f8), blurRadius: 10, spreadRadius: 15),
-  ];
+  // Define the default font family.
+  fontFamily: 'nunitoSans',
 
-  static EdgeInsets padding =
-  const EdgeInsets.symmetric(horizontal: 20, vertical: 10);
-  static EdgeInsets hPadding = const EdgeInsets.symmetric(
-    horizontal: 10,
+  // Define the default `TextTheme`. Use this to specify the default
+  // text styling for headlines, titles, bodies of text, and more.
+  textTheme: const
+  TextTheme(
+  headline1: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+  headline2: TextStyle(fontSize: 22.0, fontStyle: FontStyle.italic),
+  headline3: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+  headline4: TextStyle(fontSize: 18.0, fontStyle: FontStyle.italic),
+  headline5: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+  headline6: TextStyle(fontSize: 14.0, fontStyle: FontStyle.italic),
+  bodyText1: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+  bodyText2: TextStyle(fontSize: 10.0, fontFamily: 'Hind'),
+  ),
   );
 
-  static double fullWidth(BuildContext context) {
-    return MediaQuery.of(context).size.width;
-  }
+  // static ThemeData lightTheme = ThemeData(
+  //     backgroundColor: LightColor.whiteColor,
+  //     primaryColor: LightColor.whiteColor,
+  //     cardTheme: CardTheme(color: LightColor.turquoiseColor),
+  //     textTheme: TextTheme(bodyText1: TextStyle(color: LightColor.blackColor)),
+  //     iconTheme: IconThemeData(color: LightColor.blackColor),
+  //     bottomAppBarColor: LightColor.whiteColor,
+  //     dividerColor: LightColor.lightGrey,
+  //     primaryTextTheme:
+  //     TextTheme(bodyText1: TextStyle(color: LightColor.titleTextColor)));
 
-  static double fullHeight(BuildContext context) {
-    return MediaQuery.of(context).size.height;
-  }
+
 }

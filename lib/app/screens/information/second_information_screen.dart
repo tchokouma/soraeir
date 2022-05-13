@@ -34,25 +34,31 @@ class SecondInformationScreen extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: Image.asset(
-                "assets/images/logo03.png",
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    "assets/images/logo03.png",
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Text(
+                    "Pas besoin de vous déplacer pour des medicaments, nous vous livrons.",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.normal,
+                      letterSpacing: 0.5,
+                      wordSpacing: 0.5,
+                      height: 1.5,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
             ),
-            const Expanded(
-                flex: 2,
-                child: Text(
-                  "Pas besoin de vous déplacer pour des medicaments, nous vous livrons.",
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.normal,
-                    letterSpacing: 0.5,
-                    wordSpacing: 0.5,
-                    height: 1.5,
-                  ),
-                  textAlign: TextAlign.center,
-                )),
             Expanded(
-                flex: 2, child: Image.asset("assets/images/default01.png")),
+                flex: 3, child: Image.asset("assets/images/default01.png")),
             Expanded(
                 flex: 2,
                 child: Column(

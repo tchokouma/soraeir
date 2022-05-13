@@ -37,6 +37,7 @@ dependencies:
   hexcolor: ^2.0.6
   font_awesome_flutter: ^9.1.0
   fluttertoast: ^8.0.9
+  background_app_bar: ^2.0.1
   firebase_core: ^1.14.1
   firebase_auth: ^3.3.14
   firebase_database: ^9.0.11

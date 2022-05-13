@@ -1,102 +1,97 @@
-
-
-
-
-
-
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:soraeir/app/themes/light_color.dart';
 
+import '../../../global/global.dart';
 import '../../themes/ThemeHelper.dart';
+import '../../themes/light_color.dart';
+import '../../widgets/progress_dialog.dart';
+import '../splashscreen/splash_screen.dart';
 import 'login_screen.dart';
 
-class SignUpScreen extends StatefulWidget
-{
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
+
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-
-
-class _SignUpScreenState extends State<SignUpScreen>
-{
-  TextEditingController firstNameTextEditingController = TextEditingController();
+class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController firstNameTextEditingController =
+      TextEditingController();
   TextEditingController lastNameTextEditingController = TextEditingController();
   TextEditingController ageTextEditingController = TextEditingController();
-  TextEditingController phoneNumberTextEditingController = TextEditingController();
+  TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
+  TextEditingController confirmationPasswordTextEditingController =
+      TextEditingController();
 
-  //
-  // validateForm()
-  // {
-  //   if(firstNameTextEditingController.text.length < 3)
-  //   {
-  //     Fluttertoast.showToast(msg: "name must be atleast 3 Characters.");
-  //   }
-  //   else if(!emailTextEditingController.text.contains("@"))
-  //   {
-  //     Fluttertoast.showToast(msg: "Email address is not Valid.");
-  //   }
-  //   else if(phoneTextEditingController.text.isEmpty)
-  //   {
-  //     Fluttertoast.showToast(msg: "Phone Number is required.");
-  //   }
-  //   else if(passwordTextEditingController.text.length < 6)
-  //   {
-  //     Fluttertoast.showToast(msg: "Password must be atleast 6 Characters.");
-  //   }
-  //   else
-  //   {
-  //     saveUserInfoNow();
-  //   }
-  // }
+  validateForm() {
+    if (firstNameTextEditingController.text.length < 3) {
+      Fluttertoast.showToast(
+          msg: "le nom doit comporter au moins 3 caractères.");
+    } else if (lastNameTextEditingController.text.length < 3) {
+      Fluttertoast.showToast(
+          msg: "le prénom de famille doit comporter au moins 3 caractères.");
+    } else if (!emailTextEditingController.text.contains("@")) {
+      Fluttertoast.showToast(msg: "L'adresse email n'est pas valide.");
+    } else if (passwordTextEditingController.text.length < 6) {
+      Fluttertoast.showToast(
+          msg: "Le mot de passe doit être au moins de 6 caractères.");
+    } else if (confirmationPasswordTextEditingController.text !=
+        passwordTextEditingController.text) {
+      Fluttertoast.showToast(
+          msg: "le mot de passe et la confirmation ne correspondent pas.");
+    } else {
+      saveUserInfoNow();
+    }
+  }
 
-  // saveUserInfoNow() async
-  // {
-  //   showDialog(
-  //       context: context,
-  //       barrierDismissible: false,
-  //       builder: (BuildContext c)
-  //       {
-  //         return ProgressDialog(message: "Processing, Please wait...",);
-  //       }
-  //   );
-  //
-  //   final User? firebaseUser = (
-  //       await fAuth.createUserWithEmailAndPassword(
-  //         email: emailTextEditingController.text.trim(),
-  //         password: passwordTextEditingController.text.trim(),
-  //       ).catchError((msg){
-  //         Navigator.pop(context);
-  //         Fluttertoast.showToast(msg: "Error: " + msg.toString());
-  //       })
-  //   ).user;
-  //
-  //   if(firebaseUser != null)
-  //   {
-  //     Map userMap =
-  //     {
-  //       "id": firebaseUser.uid,
-  //       "name": nameTextEditingController.text.trim(),
-  //       "email": emailTextEditingController.text.trim(),
-  //       "phone": phoneTextEditingController.text.trim(),
-  //     };
-  //
-  //     DatabaseReference driversRef = FirebaseDatabase.instance.ref().child("users");
-  //     driversRef.child(firebaseUser.uid).set(userMap);
-  //
-  //     currentFirebaseUser = firebaseUser;
-  //     Fluttertoast.showToast(msg: "Account has been Created.");
-  //     Navigator.push(context, MaterialPageRoute(builder: (c)=> MySplashScreen()));
-  //   }
-  //   else
-  //   {
-  //     Navigator.pop(context);
-  //     Fluttertoast.showToast(msg: "Account has not been Created.");
-  //   }
-  // }
+  saveUserInfoNow() async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext c) {
+          return ProgressDialog(
+            message: "Traitement en cours, veuillez patienter...",
+          );
+        });
+
+    final User? firebaseUser = (await fAuth
+            .createUserWithEmailAndPassword(
+      email: emailTextEditingController.text.trim(),
+      password: passwordTextEditingController.text.trim(),
+    )
+            .catchError((msg) {
+      Navigator.pop(context);
+      Fluttertoast.showToast(msg: "Error: " + msg.toString());
+    }))
+        .user;
+
+    if (firebaseUser != null) {
+      Map clientMap = {
+        "clientid": firebaseUser.uid,
+        "firstname": firstNameTextEditingController.text.trim(),
+        "lastname": lastNameTextEditingController.text.trim(),
+        "age": ageTextEditingController.text.trim(),
+        "email": emailTextEditingController.text.trim(),
+        "password": passwordTextEditingController.text.trim(),
+      };
+
+      DatabaseReference clientsRef =
+          FirebaseDatabase.instance.ref().child("clients");
+      clientsRef.child(firebaseUser.uid).set(clientMap);
+
+      currentFirebaseUser = firebaseUser;
+      Fluttertoast.showToast(msg: "Le compte a été créé.");
+      Navigator.push(
+          context, MaterialPageRoute(builder: (c) => const SplashScreen()));
+    } else {
+      Navigator.pop(context);
+      Fluttertoast.showToast(msg: "Le compte n'a pas été créé.");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,8 +106,9 @@ class _SignUpScreenState extends State<SignUpScreen>
             color: LightColor.blackColor,
             size: 32,
           ),
-          onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (c)=> LoginScreen()));
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (c) => LoginScreen()));
           },
         ),
         title: const Text(
@@ -126,218 +122,90 @@ class _SignUpScreenState extends State<SignUpScreen>
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-
-             const SizedBox(height: 10,),
-
+              const SizedBox(
+                height: 10,
+              ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Image.asset("assets/images/person01.png"),
               ),
-              const SizedBox(height: 10,),
-
-              Container(
-                child: TextFormField(
-                  controller: firstNameTextEditingController
-                  ,
-                  decoration: ThemeHelper().textInputDecorationName('Nom', 'Entrez votre nom'),
-                ),
-                //decoration: ThemeHelper().inputBoxDecorationShaddow(),
+              const SizedBox(
+                height: 10,
               ),
-              const SizedBox(height: 10,),
-
-              Container(
-                child: TextFormField(
-                  controller: lastNameTextEditingController
-                  ,
-                  decoration: ThemeHelper().textInputDecorationName('Prénom', 'Entrez votre prénom'),
-                ),
-                //decoration: ThemeHelper().inputBoxDecorationShaddow(),
+              TextFormField(
+                controller: firstNameTextEditingController,
+                decoration: ThemeHelper()
+                    .textInputDecorationName('Nom', 'Entrez votre nom'),
               ),
-              const SizedBox(height: 10,),
-
-              Container(
-                child: TextFormField(
-                  controller: ageTextEditingController
-                  ,
-                  decoration: ThemeHelper().textInputDecorationAge('Âge', 'Entrez votre âge'),
-                ),
-                //decoration: ThemeHelper().inputBoxDecorationShaddow(),
+              const SizedBox(
+                height: 10,
               ),
-              const SizedBox(height: 10,),
-
-              Container(
-                child: TextFormField(
-                  controller: phoneNumberTextEditingController
-                  ,
-                  decoration: ThemeHelper().textInputDecorationPhone('Adresse email', 'Entrez votre adresse email'),
-                ),
-                //decoration: ThemeHelper().inputBoxDecorationShaddow(),
+              TextFormField(
+                controller: lastNameTextEditingController,
+                decoration: ThemeHelper()
+                    .textInputDecorationName('Prénom', 'Entrez votre prénom'),
               ),
-              const SizedBox(height: 10,),
-
-              Container(
-                child: TextFormField(
-                  controller: phoneNumberTextEditingController
-                  ,
-                  decoration: ThemeHelper().textInputDecorationKey('Mot de passe', 'Entrez votre mot de passe'),
-                ),
-                //decoration: ThemeHelper().inputBoxDecorationShaddow(),
+              const SizedBox(
+                height: 10,
               ),
-              const SizedBox(height: 10,),
-
-              Container(
-                child: TextFormField(
-                  controller: phoneNumberTextEditingController
-                  ,
-                  decoration: ThemeHelper().textInputDecorationKey('Confirmation', 'Confirmez votre mot de passe'),
-                ),
-                //decoration: ThemeHelper().inputBoxDecorationShaddow(),
+              TextFormField(
+                controller: ageTextEditingController,
+                decoration: ThemeHelper()
+                    .textInputDecorationAge('Âge', 'Entrez votre âge'),
               ),
-              const SizedBox(height: 10,),
-
-            
-
-
-              //
-              // TextFormField(
-              //   controller: firstNameTextEditingController,
-              //   style: const TextStyle(
-              //       color: Colors.grey
-              //   ),
-              //   decoration: const InputDecoration(
-              //     labelText: "Name",
-              //     hintText: "Name",
-              //     enabledBorder: UnderlineInputBorder(
-              //       borderSide: BorderSide(color: Colors.grey),
-              //     ),
-              //     focusedBorder: UnderlineInputBorder(
-              //       borderSide: BorderSide(color: Colors.grey),
-              //     ),
-              //     hintStyle: TextStyle(
-              //       color: Colors.grey,
-              //       fontSize: 10,
-              //     ),
-              //     labelStyle: TextStyle(
-              //       color: Colors.grey,
-              //       fontSize: 14,
-              //     ),
-              //   ),
-              // ),
-              //
-              // TextField(
-              //   controller: lastNameTextEditingController,
-              //   keyboardType: TextInputType.emailAddress,
-              //   style: const TextStyle(
-              //       color: Colors.grey
-              //   ),
-              //   decoration: const InputDecoration(
-              //     labelText: "Email",
-              //     hintText: "Email",
-              //     enabledBorder: UnderlineInputBorder(
-              //       borderSide: BorderSide(color: Colors.grey),
-              //     ),
-              //     focusedBorder: UnderlineInputBorder(
-              //       borderSide: BorderSide(color: Colors.grey),
-              //     ),
-              //     hintStyle: TextStyle(
-              //       color: Colors.grey,
-              //       fontSize: 10,
-              //     ),
-              //     labelStyle: TextStyle(
-              //       color: Colors.grey,
-              //       fontSize: 14,
-              //     ),
-              //   ),
-              // ),
-              //
-              // TextField(
-              //   controller: phoneNumberTextEditingController,
-              //   keyboardType: TextInputType.phone,
-              //   style: const TextStyle(
-              //       color: Colors.grey
-              //   ),
-              //   decoration: const InputDecoration(
-              //     labelText: "Phone",
-              //     hintText: "Phone",
-              //     enabledBorder: UnderlineInputBorder(
-              //       borderSide: BorderSide(color: Colors.grey),
-              //     ),
-              //     focusedBorder: UnderlineInputBorder(
-              //       borderSide: BorderSide(color: Colors.grey),
-              //     ),
-              //     hintStyle: TextStyle(
-              //       color: Colors.grey,
-              //       fontSize: 10,
-              //     ),
-              //     labelStyle: TextStyle(
-              //       color: Colors.grey,
-              //       fontSize: 14,
-              //     ),
-              //   ),
-              // ),
-              //
-              // TextField(
-              //   controller: passwordTextEditingController,
-              //   keyboardType: TextInputType.text,
-              //   obscureText: true,
-              //   style: const TextStyle(
-              //       color: Colors.grey
-              //   ),
-              //   decoration: const InputDecoration(
-              //     labelText: "Password",
-              //     hintText: "Password",
-              //     enabledBorder: UnderlineInputBorder(
-              //       borderSide: BorderSide(color: Colors.grey),
-              //     ),
-              //     focusedBorder: UnderlineInputBorder(
-              //       borderSide: BorderSide(color: Colors.grey),
-              //     ),
-              //     hintStyle: TextStyle(
-              //       color: Colors.grey,
-              //       fontSize: 10,
-              //     ),
-              //     labelStyle: TextStyle(
-              //       color: Colors.grey,
-              //       fontSize: 14,
-              //     ),
-              //   ),
-              // ),
-
-              const SizedBox(height: 20,),
-
-              SizedBox(height: 30.0),
-              Container(
-               // decoration: ThemeHelper().buttonBoxDecoration(context),
-                child: ElevatedButton(
-                  style: ThemeHelper().buttonStyle(),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(110, 0, 110, 0),
-                    child: Text(
-                      "Créer".toUpperCase(),
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: emailTextEditingController,
+                decoration: ThemeHelper().textInputDecorationEmail(
+                    'Adresse email', 'Entrez votre adresse email'),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: passwordTextEditingController,
+                decoration: ThemeHelper().textInputDecorationKey(
+                    'Mot de passe', 'Entrez votre mot de passe'),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: confirmationPasswordTextEditingController,
+                decoration: ThemeHelper().textInputDecorationKey(
+                    'Confirmation', 'Confirmez votre mot de passe'),
+              ),
+              const SizedBox(height: 30.0),
+              ElevatedButton(
+                style: ThemeHelper().buttonStyle(),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(110, 0, 110, 0),
+                  child: Text(
+                    "Créer".toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
-                  onPressed: () {
-
-                  },
                 ),
+                onPressed: () {
+                  validateForm();
+                },
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               TextButton(
                 child: const Text(
                   "Vous avez déjà un compte? Connectez-vous ici",
                   style: TextStyle(color: LightColor.blackColor),
                 ),
-                onPressed: ()
-                {
-                  Navigator.push(context, MaterialPageRoute(builder: (c)=> LoginScreen()));
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (c) => LoginScreen()));
                 },
               ),
-
             ],
           ),
         ),

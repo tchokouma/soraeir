@@ -22,12 +22,12 @@ class FirstInformatioScreen extends StatelessWidget {
               width: 260,
             ),
           ),
-          Expanded(
+          const Expanded(
             flex: 1,
             child: Padding(
               //alignment: Alignment.bottomCenter,
               padding: EdgeInsets.fromLTRB(35, 0, 35, 0),
-              child: const Text(
+              child: Text(
                 "SORAEIR est une pharmacie en ligne, elle utilise des drones pour livrer ses produits vers les endroits reculés du Royaume. Il suffit juste de passer votre commande à partir de cette application mobile que vous détenez entre les mains et la livraison se fera dans les 15 minutes ou plus selon la distance qui nous écarte. ",
                 style: TextStyle(
                   fontSize: 14,

@@ -1,75 +1,150 @@
-
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:soraeir/app/themes/light_color.dart';
 
-class ThemeHelper{
-
-  InputDecoration textInputDecorationName([String lableText="", String hintText = ""]){
+class ThemeHelper {
+  InputDecoration textInputDecorationName(
+      [String lableText = "", String hintText = ""]) {
     return InputDecoration(
       labelText: lableText,
       hintText: hintText,
       hintStyle: TextStyle(color: LightColor.turquoiseColor),
       labelStyle: TextStyle(color: LightColor.blackColor),
-      prefixIcon: Icon(Icons.person, color: LightColor.turquoiseColor,),
+      prefixIcon: Icon(
+        Icons.person,
+        color: LightColor.turquoiseColor,
+      ),
       fillColor: LightColor.WhiteForbackgroundColor,
       filled: true,
       contentPadding: EdgeInsets.fromLTRB(2, 0, 2, 0),
-      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0), borderSide: BorderSide(color: LightColor.grayColor)),
-      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0), borderSide: BorderSide(color: LightColor.blackColor)),
-      errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0), borderSide: BorderSide(color: Colors.red, width: 2.0)),
-      focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0), borderSide: BorderSide(color: Colors.red, width: 2.0)),
+      focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: LightColor.grayColor)),
+      enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: LightColor.blackColor)),
+      errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: Colors.red, width: 2.0)),
+      focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: Colors.red, width: 2.0)),
     );
   }
 
-  InputDecoration textInputDecorationAge([String lableText="", String hintText = ""]){
+  InputDecoration textInputDecorationAge(
+      [String lableText = "", String hintText = ""]) {
     return InputDecoration(
       labelText: lableText,
       hintText: hintText,
       hintStyle: TextStyle(color: LightColor.turquoiseColor),
       labelStyle: TextStyle(color: LightColor.blackColor),
-      prefixIcon: Icon(Icons.calendar_today_sharp, color: LightColor.turquoiseColor,),
+      prefixIcon: Icon(
+        Icons.calendar_today_sharp,
+        color: LightColor.turquoiseColor,
+      ),
       fillColor: LightColor.WhiteForbackgroundColor,
       filled: true,
       contentPadding: EdgeInsets.fromLTRB(2, 0, 2, 0),
-      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0), borderSide: BorderSide(color: LightColor.grayColor)),
-      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0), borderSide: BorderSide(color: LightColor.blackColor)),
-      errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0), borderSide: BorderSide(color: Colors.red, width: 2.0)),
-      focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0), borderSide: BorderSide(color: Colors.red, width: 2.0)),
+      focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: LightColor.grayColor)),
+      enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: LightColor.blackColor)),
+      errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: Colors.red, width: 2.0)),
+      focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: Colors.red, width: 2.0)),
     );
   }
 
-  InputDecoration textInputDecorationPhone([String lableText="", String hintText = ""]){
+  InputDecoration textInputDecorationEmail(
+      [String lableText = "", String hintText = ""]) {
     return InputDecoration(
       labelText: lableText,
       hintText: hintText,
       hintStyle: TextStyle(color: LightColor.turquoiseColor),
       labelStyle: TextStyle(color: LightColor.blackColor),
-      prefixIcon: Icon(Icons.phone, color: LightColor.turquoiseColor,),
+      prefixIcon: Icon(
+        Icons.email,
+        color: LightColor.turquoiseColor,
+      ),
       fillColor: LightColor.WhiteForbackgroundColor,
       filled: true,
       contentPadding: EdgeInsets.fromLTRB(2, 0, 2, 0),
-      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0), borderSide: BorderSide(color: LightColor.grayColor)),
-      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0), borderSide: BorderSide(color: LightColor.blackColor)),
-      errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0), borderSide: BorderSide(color: Colors.red, width: 2.0)),
-      focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0), borderSide: BorderSide(color: Colors.red, width: 2.0)),
+      focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: LightColor.grayColor)),
+      enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: LightColor.blackColor)),
+      errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: Colors.red, width: 2.0)),
+      focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: Colors.red, width: 2.0)),
     );
   }
 
-  InputDecoration textInputDecorationKey([String lableText="", String hintText = ""]){
+  InputDecoration textInputDecorationPhone(
+      [String lableText = "", String hintText = ""]) {
     return InputDecoration(
       labelText: lableText,
       hintText: hintText,
       hintStyle: TextStyle(color: LightColor.turquoiseColor),
       labelStyle: TextStyle(color: LightColor.blackColor),
-      prefixIcon: Icon(Icons.key, color: LightColor.turquoiseColor,),
+      prefixIcon: Icon(
+        Icons.phone,
+        color: LightColor.turquoiseColor,
+      ),
       fillColor: LightColor.WhiteForbackgroundColor,
       filled: true,
       contentPadding: EdgeInsets.fromLTRB(2, 0, 2, 0),
-      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0), borderSide: BorderSide(color: LightColor.grayColor)),
-      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0), borderSide: BorderSide(color: LightColor.blackColor)),
-      errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0), borderSide: BorderSide(color: Colors.red, width: 2.0)),
-      focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0), borderSide: BorderSide(color: Colors.red, width: 2.0)),
+      focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: LightColor.grayColor)),
+      enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: LightColor.blackColor)),
+      errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: Colors.red, width: 2.0)),
+      focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: Colors.red, width: 2.0)),
+    );
+  }
+
+  InputDecoration textInputDecorationKey(
+      [String lableText = "", String hintText = ""]) {
+    return InputDecoration(
+      labelText: lableText,
+      hintText: hintText,
+      hintStyle: TextStyle(color: LightColor.turquoiseColor),
+      labelStyle: TextStyle(color: LightColor.blackColor),
+      prefixIcon: Icon(
+        Icons.key,
+        color: LightColor.turquoiseColor,
+      ),
+      fillColor: LightColor.WhiteForbackgroundColor,
+      filled: true,
+      contentPadding: EdgeInsets.fromLTRB(2, 0, 2, 0),
+      focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: LightColor.grayColor)),
+      enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: LightColor.blackColor)),
+      errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: Colors.red, width: 2.0)),
+      focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          borderSide: BorderSide(color: Colors.red, width: 2.0)),
     );
   }
 
@@ -120,7 +195,7 @@ class ThemeHelper{
       ),
       minimumSize: MaterialStateProperty.all(Size(45, 45)),
       backgroundColor: MaterialStateProperty.all(LightColor.turquoiseColor),
-     // shadowColor: MaterialStateProperty.all(LightColor.redColor),
+      // shadowColor: MaterialStateProperty.all(LightColor.redColor),
     );
   }
 
@@ -143,9 +218,6 @@ class ThemeHelper{
       ],
     );
   }
-
 }
 
-class LoginFormStyle{
-
-}
+class LoginFormStyle {}

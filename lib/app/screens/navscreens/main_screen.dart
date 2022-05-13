@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:soraeir/app/screens/authentication/login_screen.dart';
 import '../../themes/light_color.dart';
 
 import 'search_screen.dart';
@@ -14,12 +16,33 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreen extends State<MainScreen> {
+  int counter = 0;
   List screens = [
     HomeScreen(),
     SearchScreen(),
     ContactScreen(),
     MyAccountScreen()
   ];
+  // static const TextStyle optionStyle =
+  //     TextStyle(fontSize: 30, fontWeight: FontWeight.w500);
+  // final List<Widget> _children = [
+  //   Text(
+  //     "Accueil",
+  //     style: optionStyle,
+  //   ),
+  //   Text(
+  //     "Recherche",
+  //     style: optionStyle,
+  //   ),
+  //   Text(
+  //     "Contact",
+  //     style: optionStyle,
+  //   ),
+  //   Text(
+  //     "Mon profile",
+  //     style: optionStyle,
+  //   )
+  // ];
   int currentIndex = 0;
   void onTap(int index) {
     setState(() {
@@ -30,34 +53,30 @@ class _MainScreen extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("SORAEIR"),
-        backgroundColor: LightColor.turquoiseColor,
-      ),
       backgroundColor: LightColor.WhiteForbackgroundColor,
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-          unselectedFontSize: 0,
-          selectedFontSize: 0,
+          unselectedFontSize: 12,
+          selectedFontSize: 14,
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.white,
           onTap: onTap,
           currentIndex: currentIndex,
-          selectedItemColor: LightColor.turquoiseColor,
-          unselectedItemColor: LightColor.blackColor,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
+          selectedItemColor: LightColor.turquoiseColor.withOpacity(0.7),
+          unselectedItemColor: LightColor.blackColor.withOpacity(0.7),
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
           elevation: 0,
           items: const [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined, size: 32.0), label: "Home"),
+                icon: Icon(Icons.home_outlined, size: 36.0), label: 'Accueil'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.search, size: 32.0), label: "search"),
+                icon: Icon(Icons.search, size: 36.0), label: 'Recherche'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.phone, size: 32.0), label: "phone"),
+                icon: Icon(Icons.phone, size: 36.0), label: 'Contact'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle_rounded, size: 32.0),
-                label: "account"),
+                icon: Icon(Icons.person_outline_sharp, size: 36.0),
+                label: 'Mon profile'),
           ]),
     );
   }

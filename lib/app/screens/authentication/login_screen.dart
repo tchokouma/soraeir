@@ -1,12 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:soraeir/app/screens/authentication/signup_screen.dart';
-import 'package:soraeir/app/themes/app_theme.dart';
+
+import 'package:soraeir/app/screens/navscreens/main_screen.dart';
+
 import 'package:soraeir/app/themes/light_color.dart';
 
+import '../../../global/global.dart';
 import '../../themes/ThemeHelper.dart';
+import '../../widgets/progress_dialog.dart';
+import '../splashscreen/splash_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -14,74 +20,61 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController phoneNumberTextEditingController =
-      TextEditingController();
+  TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
 
-  // validateForm()
-  // {
-  //   if(!emailTextEditingController.text.contains("@"))
-  //   {
-  //     Fluttertoast.showToast(msg: "Email address is not Valid.");
-  //   }
-  //   else if(passwordTextEditingController.text.isEmpty)
-  //   {
-  //     Fluttertoast.showToast(msg: "Password is required.");
-  //   }
-  //   else
-  //   {
-  //     loginUserNow();
-  //   }
-  // }
-  //
-  // loginUserNow() async
-  // {
-  //   showDialog(
-  //       context: context,
-  //       barrierDismissible: false,
-  //       builder: (BuildContext c)
-  //       {
-  //         return ProgressDialog(message: "Processing, Please wait...",);
-  //       }
-  //   );
-  //
-  //   final User? firebaseUser = (
-  //       await fAuth.signInWithEmailAndPassword(
-  //         email: emailTextEditingController.text.trim(),
-  //         password: passwordTextEditingController.text.trim(),
-  //       ).catchError((msg){
-  //         Navigator.pop(context);
-  //         Fluttertoast.showToast(msg: "Error: " + msg.toString());
-  //       })
-  //   ).user;
-  //
-  //   if(firebaseUser != null)
-  //   {
-  //     DatabaseReference usersRef = FirebaseDatabase.instance.ref().child("users");
-  //     usersRef.child(firebaseUser.uid).once().then((driverKey){
-  //       final snap = driverKey.snapshot;
-  //       if(snap.value != null )
-  //       {
-  //         currentFirebaseUser = firebaseUser;
-  //         Fluttertoast.showToast(msg: "Login Successful.");
-  //         Navigator.push(context, MaterialPageRoute(builder: (c)=> const SplashScreen()));
-  //       }
-  //       else
-  //       {
-  //         Fluttertoast.showToast(msg: "No record exist with this email.");
-  //         fAuth.signOut();
-  //         Navigator.push(context, MaterialPageRoute(builder: (c)=> const SplashScreen()));
-  //
-  //       }
-  //     });
-  //
-  //   }
-  //   else
-  //   {
-  //     Navigator.pop(context);
-  //     Fluttertoast.showToast(msg: "Error Occurred during Login.");
-  //   }
-  // }
+  validateForm() {
+    if (!emailTextEditingController.text.contains("@")) {
+      Fluttertoast.showToast(msg: "Email address is not Valid.");
+    } else if (passwordTextEditingController.text.isEmpty) {
+      Fluttertoast.showToast(msg: "Password is required.");
+    } else {
+      loginUserNow();
+    }
+  }
+
+  loginUserNow() async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext c) {
+          return ProgressDialog(
+            message: "Processing, Please wait...",
+          );
+        });
+
+    final User? firebaseUser = (await fAuth
+            .signInWithEmailAndPassword(
+      email: emailTextEditingController.text.trim(),
+      password: passwordTextEditingController.text.trim(),
+    )
+            .catchError((msg) {
+      Navigator.pop(context);
+      Fluttertoast.showToast(msg: "Error: " + msg.toString());
+    }))
+        .user;
+
+    if (firebaseUser != null) {
+      DatabaseReference usersRef =
+          FirebaseDatabase.instance.ref().child("clients");
+      usersRef.child(firebaseUser.uid).once().then((clientKey) {
+        final snap = clientKey.snapshot;
+        if (snap.value != null) {
+          Fluttertoast.showToast(msg: "Login Successful.");
+          Navigator.push(
+              context, MaterialPageRoute(builder: (c) => const SplashScreen()));
+        } else {
+          Fluttertoast.showToast(msg: "No record exist with this email.");
+          fAuth.signOut();
+          Navigator.push(
+              context, MaterialPageRoute(builder: (c) => const SplashScreen()));
+        }
+      });
+    } else {
+      Navigator.pop(context);
+      Fluttertoast.showToast(msg: "Error Occurred during Login.");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,10 +141,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Container(
                   child: TextFormField(
-                    controller: phoneNumberTextEditingController,
+                    controller: emailTextEditingController,
                     decoration: ThemeHelper().textInputDecorationPhone(
-                        'Numéro de téléphone',
-                        'Entrez votre numéro de téléphone'),
+                        'Email', 'Entrez votre login'),
                   ),
                   //decoration: ThemeHelper().inputBoxDecorationShaddow(),
                 ),
@@ -160,68 +152,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Container(
                   child: TextFormField(
-                    controller: phoneNumberTextEditingController,
+                    controller: passwordTextEditingController,
                     decoration: ThemeHelper().textInputDecorationKey(
                         'Mot de passe', 'Entrez votre mot de passe'),
                   ),
                   //decoration: ThemeHelper().inputBoxDecorationShaddow(),
                 ),
-
-                // TextField(
-                //   controller: phoneNumberTextEditingController,
-                //   keyboardType: TextInputType.phone,
-                //   style: const TextStyle(
-                //       color: Colors.grey
-                //   ),
-                //   decoration: const InputDecoration(
-                //     icon: Icon(Icons.call),
-                //     labelText: "Numéro de téléphone",
-                //     hintText: "Numéro de téléphone",
-                //     enabledBorder: UnderlineInputBorder(
-                //       borderSide: BorderSide(color: Colors.grey),
-                //     ),
-                //     focusedBorder: UnderlineInputBorder(
-                //       borderSide: BorderSide(color: Colors.grey),
-                //     ),
-                //     hintStyle: TextStyle(
-                //       color: Colors.grey,
-                //       fontSize: 10,
-                //     ),
-                //     labelStyle: TextStyle(
-                //       color: Colors.grey,
-                //       fontSize: 14,
-                //     ),
-                //   ),
-                // ),
-                //
-                // TextField(
-                //
-                //   controller: passwordTextEditingController,
-                //   keyboardType: TextInputType.text,
-                //   obscureText: true,
-                //   style: const TextStyle(
-                //       color: Colors.grey
-                //   ),
-                //   decoration: const InputDecoration(
-                //     icon: Icon(Icons.key),
-                //     labelText: "Mot de passe",
-                //     hintText: "Mot de passe",
-                //     enabledBorder: UnderlineInputBorder(
-                //       borderSide: BorderSide(color: Colors.grey),
-                //     ),
-                //     focusedBorder: UnderlineInputBorder(
-                //       borderSide: BorderSide(color: Colors.grey),
-                //     ),
-                //     hintStyle: TextStyle(
-                //       color: Colors.grey,
-                //       fontSize: 10,
-                //     ),
-                //     labelStyle: TextStyle(
-                //       color: Colors.grey,
-                //       fontSize: 14,
-                //     ),
-                //   ),
-                // ),
 
                 const SizedBox(
                   height: 50,
@@ -308,7 +244,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontWeight: FontWeight.bold),
                   ),
                   onPressed: () {
-                    //validateForm();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (c) => SignUpScreen()));
                   },
                   style: ElevatedButton.styleFrom(
                     side: BorderSide(
@@ -335,7 +272,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (c) => SignUpScreen()));
+                          MaterialPageRoute(builder: (c) => MainScreen()));
                     },
                   ),
                 ),

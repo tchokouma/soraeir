@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:soraeir/app/screens/authentication/login_screen.dart';
 import '../../themes/light_color.dart';
-
+import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'search_screen.dart';
 import 'contact_screen.dart';
 import 'home_screen.dart';
@@ -23,36 +23,24 @@ class _MainScreen extends State<MainScreen> {
     ContactScreen(),
     MyAccountScreen()
   ];
-  // static const TextStyle optionStyle =
-  //     TextStyle(fontSize: 30, fontWeight: FontWeight.w500);
-  // final List<Widget> _children = [
-  //   Text(
-  //     "Accueil",
-  //     style: optionStyle,
-  //   ),
-  //   Text(
-  //     "Recherche",
-  //     style: optionStyle,
-  //   ),
-  //   Text(
-  //     "Contact",
-  //     style: optionStyle,
-  //   ),
-  //   Text(
-  //     "Mon profile",
-  //     style: optionStyle,
-  //   )
-  // ];
+
   int currentIndex = 0;
   void onTap(int index) {
-    setState(() {
-      currentIndex = index;
-    });
+    if (index != 3) {
+      setState(() {
+        currentIndex = index;
+      });
+    } else {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => MyAccountScreen()),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
+      scaffold: Scaffold(
       backgroundColor: LightColor.WhiteForbackgroundColor,
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -62,12 +50,12 @@ class _MainScreen extends State<MainScreen> {
           backgroundColor: Colors.white,
           onTap: onTap,
           currentIndex: currentIndex,
-          selectedItemColor: LightColor.turquoiseColor.withOpacity(0.7),
-          unselectedItemColor: LightColor.blackColor.withOpacity(0.7),
+          selectedItemColor: LightColor.turquoiseColor,
+          unselectedItemColor: LightColor.blackColor.withOpacity(0.8),
           showSelectedLabels: true,
           showUnselectedLabels: true,
           elevation: 0,
-          items: const [
+          items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon: Icon(Icons.home_outlined, size: 36.0), label: 'Accueil'),
             BottomNavigationBarItem(

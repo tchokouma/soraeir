@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:soraeir/app/screens/information/second_information_screen.dart';
+import 'package:soraeir/app/screens/navscreens/my_account_screen.dart';
 
 import '../../themes/ThemeHelper.dart';
 import '../../themes/light_color.dart';
@@ -18,7 +19,7 @@ class ThirdInformationScreen extends StatelessWidget {
         elevation: 0.0,
         leading: IconButton(
           tooltip: 'Back Icon',
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
             color: LightColor.blackColor,
             size: 22,
@@ -103,7 +104,7 @@ class ThirdInformationScreen extends StatelessWidget {
                       ),
                       onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (c) => LoginScreen()));
+                            MaterialPageRoute(builder: (c) => MyAccountScreen()));
                       },
                     ),
                   )

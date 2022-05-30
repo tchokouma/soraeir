@@ -1,7 +1,5 @@
-import 'package:firebase_database/firebase_database.dart';
-
 import '../global/global.dart';
-import '../models/client_model.dart';
+import '../model/client_model.dart';
 
 class AssistantMethods {
   static void readCurrentOnlineUserInfo() async {

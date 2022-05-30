@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:soraeir/app/screens/otherscreens/product_details_screen.dart';
+import 'package:soraeir/app/screens/otherscreens/product_search_by_category_screen.dart';
 
-import '../../../models/category_model.dart';
+import '../../../model/category_model.dart';
 import '../../data/category_screen_data.dart';
 
 class AllCategoryTabBar extends StatelessWidget {
@@ -26,13 +28,18 @@ class AllCategoryTabBar extends StatelessWidget {
                 ),
                 trailing: const Icon(Icons.navigate_next),
                 onTap: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => ProductSearchByCategoryScreen(
+                  //         categoryModel: categoryModel),
+                  //   ),
+                  // );
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductDetailsScreen(categoryModel: categoryModel),
-                    ),
-                  );
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) =>
+                              ProductSearchByCategoryScreen()));
                 },
               ),
             );

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:soraeir/app/screens/authentication/login_screen.dart';
+import 'package:soraeir/app/screens/navscreens/my_account_screen.dart';
 import 'package:soraeir/app/themes/ThemeHelper.dart';
 import 'package:soraeir/app/themes/light_color.dart';
 
@@ -24,16 +25,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           elevation: 0.0,
           leading: IconButton(
             tooltip: 'Close Icon',
-            icon: const Icon(
+            icon: Icon(
               Icons.close,
               color: LightColor.blackColor,
               size: 32,
             ),
             onPressed: () {
-              LoginScreen();
+              MyAccountScreen();
             },
           ),
-          title: const Text(
+          title: Text(
             'Mot de passe oublié ?',
             style: TextStyle(color: LightColor.blackColor, fontSize: 24),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'dart:math' as math;
 import '../../themes/ThemeHelper.dart';
+import '../../themes/app_theme.dart';
 import '../../themes/light_color.dart';
 import '../authentication/signup_screen.dart';
 import 'main_screen.dart';
@@ -24,7 +25,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
         elevation: 0.0,
         leading: IconButton(
           tooltip: 'Back Icon',
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
             color: LightColor.blackColor,
             size: 28,
@@ -46,18 +47,22 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                 //const SizedBox(height: 30,),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Image.asset("assets/images/logo03.png"),
+                  child: Image.asset(
+                    "assets/images/logo03.png",
+                  ),
                 ),
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Image.asset("assets/images/person01.png"),
+                  child: Image.asset(
+                    "assets/images/person01.png",
+                  ),
                 ),
 
                 const SizedBox(
                   height: 10,
                 ),
-                const Text(
+                Text(
                   "Bienvenue,",
                   style: TextStyle(
                     fontSize: 20,
@@ -66,9 +71,9 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 15,
+                  height: 10,
                 ),
-                const Text(
+                Text(
                   "Veuillez vous identifier",
                   style: TextStyle(
                     fontSize: 20,
@@ -77,7 +82,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
                 Container(
                   child: TextFormField(
@@ -88,7 +93,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                   //decoration: ThemeHelper().inputBoxDecorationShaddow(),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
                 Container(
                   child: TextFormField(
@@ -100,7 +105,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                 ),
 
                 const SizedBox(
-                  height: 50,
+                  height: 35,
                 ),
 
                 Container(
@@ -108,7 +113,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                   child: ElevatedButton(
                     style: ThemeHelper().buttonStyle(),
                     child: const Padding(
-                      padding: EdgeInsets.fromLTRB(75, 15, 75, 15),
+                      padding: EdgeInsets.fromLTRB(105, 15, 105, 15),
                       child: Text(
                         "Se connecter",
                         style: TextStyle(
@@ -127,9 +132,9 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                 ),
 
                 TextButton(
-                  child: const Text(
-                    "Mot de passe oublié? ",
-                    style: TextStyle(color: Colors.grey),
+                  child: Text(
+                    "Mot de passe oublié ? ",
+                    style: AppTheme.themeBlackText.textTheme.headline6,
                   ),
                   onPressed: () {
                     Navigator.push(context,
@@ -139,41 +144,6 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-
-                // ElevatedButton(
-                //   onPressed: ()
-                //   {
-                //     //validateForm();
-                //   },
-                //   style: ElevatedButton.styleFrom(
-                //     padding: EdgeInsets.symmetric(horizontal: 130, vertical: 22),
-                //     shape: RoundedRectangleBorder(
-                //         borderRadius: BorderRadius.circular(18.0),
-                //         side: const BorderSide(color: Color.fromRGBO(0, 160, 227, 1))),
-                //     // textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                //     primary: LightColor.turquoiseColor,
-                //   ),
-                //   child: const Text(
-                //     "Créer un compte",
-                //     style: TextStyle(
-                //       color: Colors.white,
-                //       fontSize: 10,
-                //     ),
-                //   ),
-                // ),
-
-                // OutlinedButton.icon(
-                //   icon: Icon(Icons.call),
-                //   label: Text("OutlinedButton"),
-                //   onPressed: () => print("it's pressed"),
-                //   style: ElevatedButton.styleFrom(
-                //     side: BorderSide(width: 2.0, color: Colors.blue),
-                //     shape: RoundedRectangleBorder(
-                //       borderRadius: BorderRadius.circular(32.0),
-                //     ),
-                //     padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                //   ),
-                // ),
 
                 OutlinedButton(
                   child: Text(
@@ -189,36 +159,57 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                   },
                   style: ElevatedButton.styleFrom(
                     side: BorderSide(
-                        width: 5.0, color: LightColor.turquoiseColor),
+                        width: 3.0, color: LightColor.turquoiseColor),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(32.0),
                     ),
-                    padding: EdgeInsets.fromLTRB(75, 15, 75, 15),
+                    padding: EdgeInsets.fromLTRB(95, 15, 95, 15),
                   ),
                 ),
 
                 SizedBox(
-                  height: 20,
+                  height: 55,
                 ),
-
-                Padding(
-                  padding: const EdgeInsets.only(left: 180),
-                  child: TextButton(
-                    child: const Text(
-                      "Passer cette étape -->",
-                      style:
-                          TextStyle(color: LightColor.blackColor, fontSize: 12),
-                      textAlign: TextAlign.center,
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Container(
+                    width: 200,
+                    alignment: Alignment.bottomRight,
+                    child: TextButton(
+                      onPressed: () => {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (c) => MainScreen()))
+                      },
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: Row(
+                          // Replace with a Row for horizontal icon + text
+                          children: <Widget>[
+                            Text(
+                              "Passer a la pharmacie",
+                              style:
+                                  AppTheme.themeBlackText.textTheme.headline6,
+                            ),
+                            Transform.rotate(
+                              angle: math.pi,
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.arrow_back,
+                                  color: LightColor.blackColor,
+                                  size: 32.0,
+                                ),
+                                onPressed: null,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (c) => MainScreen()));
-                    },
                   ),
                 ),
               ],
             ),
-          )
+          ),
         ],
       )),
     );

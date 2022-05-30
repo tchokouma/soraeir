@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:soraeir/app/screens/navscreens/my_account_screen.dart';
 
 import 'package:soraeir/app/screens/tabbar/all_category_tabbar.dart';
 
 import '../../themes/light_color.dart';
-import '../authentication/login_screen.dart';
 import '../tabbar/all_product_tabbar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -45,14 +44,14 @@ class _HomeScreenState extends State<HomeScreen>
             //centerTitle: true,
             leading: IconButton(
               tooltip: 'Back Icon',
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_back,
                 color: LightColor.blackColor,
                 size: 22,
               ),
               onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (c) => LoginScreen()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (c) => MyAccountScreen()));
               },
             ),
             flexibleSpace: Container(
@@ -66,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen>
             actions: <Widget>[
               IconButton(
                 icon: Icon(
-                  Icons.add_shopping_cart,
+                  Icons.shopping_basket,
                   size: 26.0,
                   color: LightColor.turquoiseColor,
                 ),
@@ -91,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen>
                 color: LightColor.turquoiseColor,
                 child: TabBar(
                   controller: tabController,
-                  tabs: const [
+                  tabs: [
                     Tab(
                       child: Text(
                         "Médicaments",

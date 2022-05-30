@@ -16,7 +16,7 @@ class SecondInformationScreen extends StatelessWidget {
           elevation: 0.0,
           leading: IconButton(
             tooltip: 'Back Icon',
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back,
               color: LightColor.blackColor,
               size: 22,
@@ -65,7 +65,7 @@ class SecondInformationScreen extends StatelessWidget {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Text(
                           ".",
                           style: TextStyle(

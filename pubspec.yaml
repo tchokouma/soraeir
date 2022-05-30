@@ -37,10 +37,8 @@ dependencies:
   hexcolor: ^2.0.6
   font_awesome_flutter: ^9.1.0
   fluttertoast: ^8.0.9
+  custom_navigation_bar: ^0.8.2
   background_app_bar: ^2.0.1
-  firebase_core: ^1.14.1
-  firebase_auth: ^3.3.14
-  firebase_database: ^9.0.11
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +64,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/images/product_img/
+    - assets/images/category_img/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

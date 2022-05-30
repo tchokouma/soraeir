@@ -1,7 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:soraeir/app/screens/navscreens/my_account_screen.dart';
 
 import '../../../global/global.dart';
 import '../../themes/ThemeHelper.dart';
@@ -27,71 +26,71 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController confirmationPasswordTextEditingController =
       TextEditingController();
 
-  validateForm() {
-    if (firstNameTextEditingController.text.length < 3) {
-      Fluttertoast.showToast(
-          msg: "le nom doit comporter au moins 3 caractères.");
-    } else if (lastNameTextEditingController.text.length < 3) {
-      Fluttertoast.showToast(
-          msg: "le prénom de famille doit comporter au moins 3 caractères.");
-    } else if (!emailTextEditingController.text.contains("@")) {
-      Fluttertoast.showToast(msg: "L'adresse email n'est pas valide.");
-    } else if (passwordTextEditingController.text.length < 6) {
-      Fluttertoast.showToast(
-          msg: "Le mot de passe doit être au moins de 6 caractères.");
-    } else if (confirmationPasswordTextEditingController.text !=
-        passwordTextEditingController.text) {
-      Fluttertoast.showToast(
-          msg: "le mot de passe et la confirmation ne correspondent pas.");
-    } else {
-      saveUserInfoNow();
-    }
-  }
+  // validateForm() {
+  //   if (firstNameTextEditingController.text.length < 3) {
+  //     Fluttertoast.showToast(
+  //         msg: "le nom doit comporter au moins 3 caractères.");
+  //   } else if (lastNameTextEditingController.text.length < 3) {
+  //     Fluttertoast.showToast(
+  //         msg: "le prénom de famille doit comporter au moins 3 caractères.");
+  //   } else if (!emailTextEditingController.text.contains("@")) {
+  //     Fluttertoast.showToast(msg: "L'adresse email n'est pas valide.");
+  //   } else if (passwordTextEditingController.text.length < 6) {
+  //     Fluttertoast.showToast(
+  //         msg: "Le mot de passe doit être au moins de 6 caractères.");
+  //   } else if (confirmationPasswordTextEditingController.text !=
+  //       passwordTextEditingController.text) {
+  //     Fluttertoast.showToast(
+  //         msg: "le mot de passe et la confirmation ne correspondent pas.");
+  //   } else {
+  //     saveUserInfoNow();
+  //   }
+  // }
 
-  saveUserInfoNow() async {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext c) {
-          return ProgressDialog(
-            message: "Traitement en cours, veuillez patienter...",
-          );
-        });
+  // saveUserInfoNow() async {
+  //   showDialog(
+  //       context: context,
+  //       barrierDismissible: false,
+  //       builder: (BuildContext c) {
+  //         return ProgressDialog(
+  //           message: "Traitement en cours, veuillez patienter...",
+  //         );
+  //       });
 
-    final User? firebaseUser = (await fAuth
-            .createUserWithEmailAndPassword(
-      email: emailTextEditingController.text.trim(),
-      password: passwordTextEditingController.text.trim(),
-    )
-            .catchError((msg) {
-      Navigator.pop(context);
-      Fluttertoast.showToast(msg: "Error: " + msg.toString());
-    }))
-        .user;
+  //   final User? firebaseUser = (await fAuth
+  //           .createUserWithEmailAndPassword(
+  //     email: emailTextEditingController.text.trim(),
+  //     password: passwordTextEditingController.text.trim(),
+  //   )
+  //           .catchError((msg) {
+  //     Navigator.pop(context);
+  //     Fluttertoast.showToast(msg: "Error: " + msg.toString());
+  //   }))
+  //       .user;
 
-    if (firebaseUser != null) {
-      Map clientMap = {
-        "clientid": firebaseUser.uid,
-        "firstname": firstNameTextEditingController.text.trim(),
-        "lastname": lastNameTextEditingController.text.trim(),
-        "age": ageTextEditingController.text.trim(),
-        "email": emailTextEditingController.text.trim(),
-        "password": passwordTextEditingController.text.trim(),
-      };
+  //   if (firebaseUser != null) {
+  //     Map clientMap = {
+  //       "clientid": firebaseUser.uid,
+  //       "firstname": firstNameTextEditingController.text.trim(),
+  //       "lastname": lastNameTextEditingController.text.trim(),
+  //       "age": ageTextEditingController.text.trim(),
+  //       "email": emailTextEditingController.text.trim(),
+  //       "password": passwordTextEditingController.text.trim(),
+  //     };
 
-      DatabaseReference clientsRef =
-          FirebaseDatabase.instance.ref().child("clients");
-      clientsRef.child(firebaseUser.uid).set(clientMap);
+  //     DatabaseReference clientsRef =
+  //         FirebaseDatabase.instance.ref().child("clients");
+  //     clientsRef.child(firebaseUser.uid).set(clientMap);
 
-      currentFirebaseUser = firebaseUser;
-      Fluttertoast.showToast(msg: "Le compte a été créé.");
-      Navigator.push(
-          context, MaterialPageRoute(builder: (c) => const SplashScreen()));
-    } else {
-      Navigator.pop(context);
-      Fluttertoast.showToast(msg: "Le compte n'a pas été créé.");
-    }
-  }
+  //     currentFirebaseUser = firebaseUser;
+  //     Fluttertoast.showToast(msg: "Le compte a été créé.");
+  //     Navigator.push(
+  //         context, MaterialPageRoute(builder: (c) => const SplashScreen()));
+  //   } else {
+  //     Navigator.pop(context);
+  //     Fluttertoast.showToast(msg: "Le compte n'a pas été créé.");
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -101,17 +100,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
         elevation: 0.0,
         leading: IconButton(
           tooltip: 'Close Icon',
-          icon: const Icon(
+          icon: Icon(
             Icons.close,
             color: LightColor.blackColor,
             size: 32,
           ),
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (c) => LoginScreen()));
+                context, MaterialPageRoute(builder: (c) => MyAccountScreen()));
           },
         ),
-        title: const Text(
+        title: Text(
           'Se Créer un compte ',
           style: TextStyle(color: LightColor.blackColor, fontSize: 24),
         ),
@@ -192,18 +191,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 onPressed: () {
-                  validateForm();
+                  //validateForm();
                 },
               ),
               const SizedBox(height: 20.0),
               TextButton(
-                child: const Text(
+                child: Text(
                   "Vous avez déjà un compte? Connectez-vous ici",
                   style: TextStyle(color: LightColor.blackColor),
                 ),
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (c) => LoginScreen()));
+                      MaterialPageRoute(builder: (c) => MyAccountScreen()));
                 },
               ),
             ],

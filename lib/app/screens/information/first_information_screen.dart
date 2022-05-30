@@ -53,7 +53,7 @@ class FirstInformatioScreen extends StatelessWidget {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children:  [
                     Text(
                       ".",
                       style:

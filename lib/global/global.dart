@@ -1,8 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:soraeir/models/client_model.dart';
+import 'package:soraeir/model/client_model.dart';
 
-final FirebaseAuth fAuth = FirebaseAuth.instance;
-User? currentFirebaseUser;
+//final FirebaseAuth fAuth = FirebaseAuth.instance;
+//User? currentFirebaseUser;
 ClientModel? clientModelCurrentInfo;
 
 //panier

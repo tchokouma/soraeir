@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:soraeir/app/themes/light_color.dart';
+import 'dart:math' as math;
 
 class ThemeHelper {
   InputDecoration textInputDecorationName(
@@ -66,7 +66,7 @@ class ThemeHelper {
     return InputDecoration(
       labelText: lableText,
       hintText: hintText,
-      hintStyle: TextStyle(color: LightColor.turquoiseColor),
+      hintStyle: TextStyle(color: LightColor.blackColor.withOpacity(0.6)),
       labelStyle: TextStyle(color: LightColor.blackColor),
       prefixIcon: Icon(
         Icons.email,
@@ -83,10 +83,10 @@ class ThemeHelper {
           borderSide: BorderSide(color: LightColor.blackColor)),
       errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(100.0),
-          borderSide: BorderSide(color: Colors.red, width: 2.0)),
+          borderSide: BorderSide(color: LightColor.blackColor, width: 2.0)),
       focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(100.0),
-          borderSide: BorderSide(color: Colors.red, width: 2.0)),
+          borderSide: BorderSide(color: LightColor.blackColor, width: 2.0)),
     );
   }
 
@@ -126,9 +126,15 @@ class ThemeHelper {
       hintText: hintText,
       hintStyle: TextStyle(color: LightColor.turquoiseColor),
       labelStyle: TextStyle(color: LightColor.blackColor),
-      prefixIcon: Icon(
-        Icons.key,
-        color: LightColor.turquoiseColor,
+      prefixIcon: Transform.rotate(
+        angle: -math.pi / 4,
+        child: IconButton(
+          icon: Icon(
+            Icons.vpn_key,
+            color: LightColor.turquoiseColor,
+          ),
+          onPressed: null,
+        ),
       ),
       fillColor: LightColor.WhiteForbackgroundColor,
       filled: true,
@@ -141,50 +147,12 @@ class ThemeHelper {
           borderSide: BorderSide(color: LightColor.blackColor)),
       errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(100.0),
-          borderSide: BorderSide(color: Colors.red, width: 2.0)),
+          borderSide: BorderSide(color: LightColor.blackColor, width: 20.0)),
       focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(100.0),
-          borderSide: BorderSide(color: Colors.red, width: 2.0)),
+          borderSide: BorderSide(color: LightColor.blackColor, width: 20.0)),
     );
   }
-
-  // BoxDecoration inputBoxDecorationShaddow() {
-  //   return BoxDecoration(boxShadow: [
-  //     BoxShadow(
-  //       color: Colors.red.withOpacity(0.0),
-  //       blurRadius: 20,
-  //       offset: const Offset(0, 5),
-  //     )
-  //   ]);
-  // }
-
-  // BoxDecoration buttonBoxDecoration(BuildContext context, [String color1 = "", String color2 = ""]) {
-  //   Color c1 = Theme.of(context).primaryColor;
-  //   Color c2 = Theme.of(context).accentColor;
-  //   if (color1.isEmpty == false) {
-  //     c1 = HexColor(color1);
-  //   }
-  //   if (color2.isEmpty == false) {
-  //     c2 = HexColor(color2);
-  //   }
-  //
-  //   return BoxDecoration(
-  //     // boxShadow: [
-  //     //   BoxShadow(color: Colors.black26, offset: Offset(0, 4), blurRadius: 5.0)
-  //     // ],
-  //     // gradient: LinearGradient(
-  //     //   begin: Alignment.topLeft,
-  //     //   end: Alignment.bottomRight,
-  //     //   stops: [0.0, 1.0],
-  //     //   colors: [
-  //     //     c1,
-  //     //     c2,
-  //     //   ],
-  //     // ),
-  //     //color: Colors.deepPurple.shade300,
-  //     //borderRadius: BorderRadius.circular(30),
-  //   );
-  // }
 
   ButtonStyle buttonStyle() {
     return ButtonStyle(
@@ -194,6 +162,19 @@ class ThemeHelper {
         ),
       ),
       minimumSize: MaterialStateProperty.all(Size(45, 45)),
+      backgroundColor: MaterialStateProperty.all(LightColor.turquoiseColor),
+      // shadowColor: MaterialStateProperty.all(LightColor.redColor),
+    );
+  }
+
+  ButtonStyle buttonStyle1() {
+    return ButtonStyle(
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+      ),
+      minimumSize: MaterialStateProperty.all(Size(20, 20)),
       backgroundColor: MaterialStateProperty.all(LightColor.turquoiseColor),
       // shadowColor: MaterialStateProperty.all(LightColor.redColor),
     );

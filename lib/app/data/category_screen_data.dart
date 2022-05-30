@@ -1,4 +1,4 @@
-import 'package:soraeir/models/category_model.dart';
+import 'package:soraeir/model/category_model.dart';
 
 List<CategoryModel> CategoryData = [
   CategoryModel(

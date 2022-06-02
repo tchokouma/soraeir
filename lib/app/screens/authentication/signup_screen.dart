@@ -126,7 +126,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Image.asset("assets/images/person01.png"),
+                child: Image.asset("assets/images/logo/person01.png"),
               ),
               const SizedBox(
                 height: 10,

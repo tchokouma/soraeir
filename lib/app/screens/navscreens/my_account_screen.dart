@@ -48,14 +48,14 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Image.asset(
-                    "assets/images/logo03.png",
+                    "assets/images/logo/logo03.png",
                   ),
                 ),
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Image.asset(
-                    "assets/images/person01.png",
+                    "assets/images/logo/person01.png",
                   ),
                 ),
 

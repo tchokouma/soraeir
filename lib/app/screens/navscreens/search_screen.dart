@@ -35,47 +35,9 @@ class _SearchScreenState extends State<SearchScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Text(
-              //   "Rechercher un produit",
-              //   style: TextStyle(
-              //     color: LightColor.blackColor,
-              //     fontSize: 22.0,
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // ),
               SizedBox(
                 height: 40.0,
               ),
-              // TextField(
-              //   onChanged: (value) => updateList(value),
-              //   style: TextStyle(color: Colors.white),
-              //   decoration: InputDecoration(
-              //     filled: true,
-              //     fillColor: LightColor.grayColor.withOpacity(0.3),
-              //     border: OutlineInputBorder(
-              //       borderRadius: BorderRadius.circular(16.0),
-              //       borderSide:
-              //           BorderSide(color: LightColor.blackColor, width: 4),
-              //     ),
-              //     hintText: "ex: efferalgan",
-              //     suffixIcon: Align(
-              //       alignment: Alignment.bottomLeft,
-              //       child: Padding(
-              //         padding: const EdgeInsets.all(8),
-              //         child: Icon(
-              //           Icons.search,
-              //           color: LightColor.blackColor.withOpacity(0.5),
-              //           size: 32.0,
-              //         ),
-              //       ),
-              //     ),
-              //     prefixIcon: Padding(
-              //       padding: EdgeInsetsDirectional.only(
-              //         start: 28.0,
-              //       ),
-              //     ),
-              //   ),
-              // ),
 
               TextFormField(
                 onChanged: (value) => updateList(value),
@@ -113,7 +75,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   disabledBorder: InputBorder.none,
                   //focusedErrorBorder: InputBorder.none,
                   //border: InputBorder.none,
-                  hintText: "ex: jshhshshsh",
+                  hintText: "ex: paracetamol",
                   hintStyle: TextStyle(
                       color: LightColor.blackColor.withOpacity(0.5),
                       fontSize: 12),

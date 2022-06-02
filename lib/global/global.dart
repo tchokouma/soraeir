@@ -7,3 +7,4 @@ ClientModel? clientModelCurrentInfo;
 //panier
 int counterPanier = 10;
 int counterNotifications = 10;
+bool showBottomSheetAddCartProductVar = false;

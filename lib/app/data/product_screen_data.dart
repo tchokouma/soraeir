@@ -115,7 +115,7 @@ List<ProductModel> ProductData = [
   ProductModel(
       productid: 2,
       producttitle: "Para",
-      categoryid: 1,
+      categoryid: 3,
       description: "description",
       price: 120,
       pictureLink:
@@ -125,7 +125,7 @@ List<ProductModel> ProductData = [
   ProductModel(
       productid: 1,
       producttitle: "Para",
-      categoryid: 1,
+      categoryid: 2,
       description: "description",
       price: 120,
       pictureLink:
@@ -135,7 +135,7 @@ List<ProductModel> ProductData = [
   ProductModel(
       productid: 2,
       producttitle: "Para",
-      categoryid: 1,
+      categoryid: 2,
       description: "description",
       price: 120,
       pictureLink:

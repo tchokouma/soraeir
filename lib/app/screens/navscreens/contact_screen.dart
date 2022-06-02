@@ -31,12 +31,13 @@ class _ContactScreenState extends State<ContactScreen> {
               ),
             ),
             Container(
-                child: Image.asset(
-              "assets/images/rabat01.jpg",
-              width: double.infinity,
-              fit: BoxFit.cover,
-              height: 140.0,
-            )),
+              child: Image.asset(
+                "assets/images/illustration/rabat01.jpg",
+                width: double.infinity,
+                fit: BoxFit.cover,
+                height: 140.0,
+              ),
+            ),
             Transform.translate(
               offset: Offset(0.0, -24),
               child: Center(
@@ -110,11 +111,11 @@ class _ContactScreenState extends State<ContactScreen> {
                   ),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.watch_later,
                         size: 32,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       Text(
@@ -123,12 +124,12 @@ class _ContactScreenState extends State<ContactScreen> {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(25, 0, 0, 0),
-                    child: Text(
+                    padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
+                    child: const Text(
                       "Lundi: de 08:00 à 19:00\nMardi: de 08:00 à 19:00\nMercredi: de 08:00 à 19:00\nJeudi: de 08:00 à 19:00\nVendredi: de 08:00 à 19:00\nSamedi: de 10:00 à 18:00\nDimanche: Fermée",
                       style: TextStyle(
                         fontSize: 18,

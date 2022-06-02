@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:soraeir/app/screens/authentication/forgot_password_screen.dart';
-import 'package:soraeir/app/screens/authentication/login_screen.dart';
-import 'package:soraeir/app/screens/information/first_information_screen.dart';
-import 'package:soraeir/app/screens/information/third_information_screen.dart';
+
 import 'package:soraeir/app/screens/splashscreen/splash_screen.dart';
 
-import 'app/screens/authentication/signup_screen.dart';
-import 'app/screens/information/essai.dart';
 import 'app/themes/light_color.dart';
 
 void main() async {

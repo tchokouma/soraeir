@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:soraeir/app/screens/otherscreens/product_details_screen.dart';
+import 'package:soraeir/global/global.dart';
 
 import '../../model/product_model.dart';
+import '../screens/authentication/signup_screen.dart';
+import '../themes/ThemeHelper.dart';
+import '../themes/light_color.dart';
 import 'CustomText.dart';
+import 'bottom_sheet_add_product_to_cart_widget.dart';
 
-class SingleProductWidget extends StatelessWidget {
+class SingleProductWidget extends StatefulWidget {
   final ProductModel product;
-
   const SingleProductWidget({Key? key, required this.product})
       : super(key: key);
+
+  @override
+  State<SingleProductWidget> createState() => _SingleProductWidgetState(
+        product,
+      );
+}
+
+class _SingleProductWidgetState extends State<SingleProductWidget> {
+  ProductModel product;
+  _SingleProductWidgetState(this.product);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,13 +63,15 @@ class SingleProductWidget extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (c) => ProductDetailsScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (c) => const ProductDetailsScreen()));
             },
             child: Padding(
               padding: const EdgeInsets.all(2.0),
               child: ClipRRect(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(15),
                     topRight: Radius.circular(15),
                   ),
@@ -64,7 +82,7 @@ class SingleProductWidget extends StatelessWidget {
                   )),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           CustomText(
@@ -93,12 +111,7 @@ class SingleProductWidget extends StatelessWidget {
               SizedBox(
                 width: 3,
               ),
-              IconButton(
-                  icon: Icon(
-                    Icons.add,
-                    size: 34,
-                  ),
-                  onPressed: () {})
+              BottomSheetAddProductToCartWidget(),
             ],
           ),
         ],
